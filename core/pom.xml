@@ -85,6 +85,11 @@
             <artifactId>java-jwt</artifactId>
             <version>3.8.3</version>
         </dependency>
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-validation</artifactId>
+            <version>4.2.0</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>

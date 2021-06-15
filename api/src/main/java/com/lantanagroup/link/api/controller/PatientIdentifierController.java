@@ -6,6 +6,7 @@ import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.lantanagroup.fhir.transform.FHIRTransformResult;
 import com.lantanagroup.fhir.transform.FHIRTransformer;
 import com.lantanagroup.link.Helper;
+import com.lantanagroup.link.ValidationHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
@@ -150,6 +151,7 @@ public class PatientIdentifierController extends BaseController {
         logger.debug("Receiving patient identifier FHIR List in XML");
 
         ListResource list = this.ctx.newXmlParser().parseResource(ListResource.class, body);
+        ValidationHelper.validateList(body);
         this.receiveFHIR(list, request);
     }
 
@@ -157,8 +159,9 @@ public class PatientIdentifierController extends BaseController {
     public void getPatientIdentifierListJSON(@RequestBody() String body, HttpServletRequest request) throws Exception {
         logger.debug("Receiving patient identifier FHIR List in JSON");
 
-        Resource bundle = this.ctx.newJsonParser().parseResource(Bundle.class, body);
-        this.receiveFHIR(bundle, request);
+        Resource list  = this.ctx.newJsonParser().parseResource(Bundle.class, body);
+        ValidationHelper.validateList(body);
+        this.receiveFHIR(list, request);
     }
 
     @PostMapping(value = "api/cda", consumes = MediaType.APPLICATION_XML_VALUE)
